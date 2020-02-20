@@ -1,0 +1,13 @@
+[Unit]
+Description=DNS Runner Service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/env php /var/www/dnsgui/daemon/dns_runner.php
+
+[Install]
+WantedBy=multi-user.target

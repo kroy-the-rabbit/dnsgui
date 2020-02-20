@@ -1,0 +1,161 @@
+<?php
+    $dns = new \dns($_POST); 
+    //reload everything after a post to get a new state
+    if (!empty($_POST)) {
+        $dns = new \dns(); 
+    }
+?>
+<style>
+.active2 {
+	background-color: #CCCCCC;
+}
+</style>
+	<script>
+	$(function() {
+
+        $(".delete_local_mapping").click(function (e) {
+            var mapping_id = $(this).data("mapping_id");
+            $.post( "/api.php", { action: "deleteLocalZoneMapping", mapping_id: mapping_id })
+                .done(function( data ) {
+                    document.location.href="/dns";
+            });
+            return false; 
+        });
+        
+	});
+	</script>
+            <?php if ($dns->error != null) { ?>
+		<div class="jumbotron content" style="display:block;">
+                Error: <?= $dns->error ?><br />
+            </div>
+            <?php } //endif ?>
+            <?php if ($dns->needs_update) { ?>
+			<div class="jumbotron content" style="display:block;">
+                <form method="POST" action="/dns" /><input type="submit" class="btn btn-warning btn-lg" value="Apply changes" name="applyChanges" />
+            </div>
+            <?php } //endif ?>
+			<div class="jumbotron content" style="display:block;">
+
+
+		<h2>Host Mappings</h2>
+                <?php
+
+                if (count($dns->local_zones) > 0) {
+                    foreach ($dns->local_zones as $zone) {
+                ?>
+                <br />
+                <br />
+                <a name="<?= $zone['zone'] ?>"></a>
+                <h4>Zone: <em> <?= $zone['zone'] ?></em> <?php if ($zone['primary_zone'] == 1) { echo "(primary zone)"; } ?></h4>
+                <?php
+                   if (isset($dns->clone_zones[$zone['zone']])) {
+                       echo "Clone zones: ".implode(",",$dns->clone_zones[$zone['zone']]);
+                   }
+               ?>
+               <p>
+               <form method="POST" action="/dns#<?= $zone['zone'] ?>">
+                <input type="hidden" name="zone" value="<?= $zone['zone'] ?>" />
+                <input type="text" name="new_local_zone_mapping" placeholder="hostname" />
+                <input type="text" name="new_local_zone_mapping_ip" placeholder="ip" />
+                <input class="btn btn-primary btn-xs" type="submit" value="Add Mapping" />
+                </form>
+               </p>
+                <hr />
+				<table class="table" border="0">
+				<thead>
+					<tr>
+						<th>
+							hostname
+						</th>
+						<th>
+							address
+						</th>
+						<th>
+                            &nbsp;
+						</th>
+					</tr>
+				</thead>
+                <?php
+                   if (isset($dns->local_zone_mappings[$zone['zone']])) {
+                ?>
+				<tbody>
+                    <?php
+                        $i = 0;
+			$last_hostname = "";
+                        foreach ($dns->local_zone_mappings[$zone['zone']] as $mapping) {
+				if ($last_hostname != $mapping['hostname']) {
+					$i++;
+					$last_hostname = $mapping['hostname'];
+				}
+                    ?>
+                                            
+                        <tr <?php if ($i % 2 == 0) { ?>class="active2"<?php } ?>>
+                            <td>
+                                <?= $mapping['hostname'] ?>
+                            </td>
+                            <td>
+                                <?= $mapping['ip'] ?> 
+                            </td>
+                            <td>
+                                <button type="button" class="delete_local_mapping" data-mapping_id='<?= $mapping['id'] ?>'  aria-label="Delete">
+                                      <span style="color:red;" aria-hidden="true">&times;</span>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php 
+                    } //foreachend 
+                    ?>
+				</tbody>
+                <?php } //endif ?>
+			</table>
+            <?php
+                } //foreachend
+            } //if end
+            ?>
+		<br /><br />
+		    <hr />
+		<h2>Add Zones</h2>
+		<p>
+                <h4>Local Zone</h4><br />
+                <form method="POST" action="/dns">
+                <input type="text" name="new_local_zone" placeholder="domain.name" />
+                <select name="new_local_zone_type">
+                    <option value='transparent'>Transparent</option>
+                    <option value='static'>Static</option>
+                </select>
+                <input class="btn btn-primary btn-xs" type="submit" value="Add Local Zone" />
+                </form>
+
+                <br />
+                <h4>Clone Zone</h4><br />
+                <form method="POST" action="/dns">
+                <input type="text" name="clone_zone" placeholder="domain.name" />
+                <select name="target_zone">
+                    <?php
+
+                        if (count($dns->local_zones) > 0) {
+                            foreach ($dns->local_zones as $zone) {
+                            ?>
+                                <option value='<?= $zone['zone'] ?>'><?= $zone['zone'] ?></option>
+                            <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <input class="btn btn-primary btn-xs" type="submit" value="Add Clone Zone" />
+                </form>
+		</p>
+                <hr />
+                <br />
+			</div>
+			<div class="jumbotron content" style="display:block;">
+
+                <div class="form-group">
+                    <label for="custom_config">Custom Unbound Configuration:</label>
+                    <form method="POST" action="/dns">
+                        <textarea id="custom_config" class="form-control" rows="20" name="custom_config"><?= $dns->custom_config ?></textarea><br />
+                        <input class="btn btn-primary btn-xs" type="submit" value="Save Custom Config" />
+                    </form>
+                </div>
+        
+            </div>
