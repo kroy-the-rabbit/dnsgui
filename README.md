@@ -17,7 +17,6 @@ Some of the things it supports:
 * Easily extensible through normal Unbound configuration directives.  
 * Backing up is as simple as saving the .sqlite3 database and custom_host.conf somewhere.
 
-
 ### Basic Requirements
 
 This has really only been deployed on Debian Buster with lighttpd (and the instructions that follow assume this).  But it would be trivial to throw Apache, nginx, CentOS, etc in front of this.
@@ -26,8 +25,6 @@ This has really only been deployed on Debian Buster with lighttpd (and the instr
 * PHP, specificially the 7.3.14 that is currently shipping with Buster. But it should work with earlier (to a point) and later versions.
 * SQLite3
 * lighttpd (if you are following this guide)
-
-It is designed to be protected as management. Further security can be applied by implementing SSL and HTTP Basic Auth. Further security could be applied by using a 2FA option that different web servers provide.  
 
 
 The base requirements can be installed with:
@@ -121,3 +118,9 @@ Some extra stuff that didn't quite fit anywhere else.
 * `Transparent/Static` see the difference in the [Unbound documentation](https://nlnetlabs.nl/documentation/unbound/unbound.conf/)
 
 Currently there is no way to delete a zone, just hostnames.  Manually loading up the `unbound.sqlite3` database in the sqlite3 cli and deleting the record is the only way to remove a full zone.
+
+### Security Considerations
+
+This app is designed to be protected as management. An additional layer of security should be applied by implementing SSL and HTTP Basic Auth. With a more robust web server like nginx, it would be possible to implement two-factor authentication.  
+
+Finally, this app includes CDN resources for bootstrap and JQuery.  It might be desirable for the hyper-security-conscious to host those locally and edit `index.html`.
