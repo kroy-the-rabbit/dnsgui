@@ -51,13 +51,13 @@ A few small configuration changes are necessary in `/etc/lighttpd/lighttpd.conf`
 
 Change document root:
 
-server.document-root        = "/var/www/dnsgui/docroot"
+    server.document-root        = "/var/www/dnsgui/docroot"
 
 Add a rewrite rule to end of the conf file, or in a new file in `/etc/lighttpd/conf-enabled`:
 
-url.rewrite-if-not-file = (
-    "/(.*)$" => "/index.php?_url=/(",
-)
+    url.rewrite-if-not-file = (
+        "/(.*)$" => "/index.php?_url=/(",
+    )
 
 If SSL is desired, add the certificate before restarting lighttpd:
 
