@@ -124,4 +124,4 @@ Currently there is no way to delete a zone, just hostnames.  Manually loading up
 
 This app is designed to be protected as management. An additional layer of security should be applied by implementing SSL and HTTP Basic Auth. With a more robust web server like nginx, it would be possible to implement two-factor authentication.  
 
-Finally, this app includes CDN resources for bootstrap and JQuery.  It might be desirable for the hyper-security-conscious to host those locally and edit `index.html`.
+Finally, this app includes CDN resources for bootstrap and JQuery.  For the hyper-security-conscious, it might be desirable to host those resources locally, which would require a simple edit to `view/index.html`.
