@@ -10,7 +10,8 @@ This is a project that started three or four years ago when I wasn't really sati
 Some of the things it supports:
 
 * DNS Forwarding or Recursion through Unbound.  
-* DoT Support.
+* DNS-over-TLS.
+* IPv4 and IPv6.
 * Ability to easily enter one or many local domains for internal DNS resolution.
 * Automatically build reverse DNS entries.
 * Reasonably lightweight.
