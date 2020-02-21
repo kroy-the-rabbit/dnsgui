@@ -16,7 +16,7 @@ Some of the things it supports:
 * Automatically build reverse DNS entries.
 * Reasonably lightweight.
 * Easily extensible through normal Unbound configuration directives.  
-* Backing up is as simple as saving the .sqlite3 database and custom_host.conf somewhere.
+* Backing up is as simple as saving the .sqlite3 database and custom.conf somewhere.
 
 ### Basic Requirements
 
