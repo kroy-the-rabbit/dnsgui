@@ -1,9 +1,12 @@
 # dnsgui
 
-An Unbound GUI for local DNS resolution and forwarding or recursion.
+An Unbound GUI for local DNS resolution and forwarding/recursion.
 
 ![example](https://user-images.githubusercontent.com/20545075/74970589-3ed4be00-53e4-11ea-9893-fb761d6b4c1b.png)
 
+### What is this.
+
+A simple GUI for managing local DNS.  It can act as a complete DNS server for a small home/office network.
 
 This is a project that started three or four years ago when I wasn't really satisified with any of the options for GUI DNS management.  
 
@@ -12,11 +15,10 @@ Some of the things it supports:
 * DNS Forwarding or Recursion through Unbound.  
 * DNS-over-TLS.
 * IPv4 and IPv6.
-* Ability to easily enter one or many local domains for internal DNS resolution.
-* Automatically build reverse DNS entries.
+* Ability to easily enter one or more local domains for internal DNS resolution.
+* Automatically builds reverse DNS entries.
 * Reasonably lightweight.
-* Easily extensible through normal Unbound configuration directives.  
-* Backing up is as simple as saving the .sqlite3 database and custom.conf somewhere.
+* Easily extensible through standard Unbound configuration directives.  
 
 The default [custom.conf](data/unbound.conf.d/custom.conf), which is editable in the GUI, makes a number of default assumptions.  
 
