@@ -22,6 +22,8 @@ The default [custom.conf](data/unbound.conf.d/custom.conf), which is editable in
 
 The one with the most consequence is that by default, DNS-over-TLS to CloudFlare will be used. Commenting [all the lines from #38 on](data/unbound.conf.d/custom.conf#L38), will cause `root.hints` to be used.  They can be replaced with the forwarders of your choice.
 
+### Basic Requirements
+
 This has really only been deployed on Debian Buster with lighttpd (and the instructions that follow assume this).  But it would be trivial to throw Apache, nginx, CentOS, etc in front of this.
 
 * Unbound
