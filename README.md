@@ -128,10 +128,14 @@ Finally, this app includes CDN resources for bootstrap and JQuery.  For the hype
 
 ### TODO
 
-Proper replication.  In my setup, I just had a scp job with key-based auth to a secondary Unbound instance.  This felt too hacky for release.  For the curious, this amounted to spinning up a second Debian instance, installing just Unbound, setting up passwordless ssh with keys, and dropping something like this after line #24 of the systemd daemon:
+Proper replication.  
+
+In my setup, I just had a scp job with key-based auth to a secondary Unbound instance.  This felt too hacky for release.  
+
+For the curious, this amounted to spinning up a second Debian instance, installing just Unbound, setting up passwordless ssh with keys, and dropping something like this after line #24 of the systemd daemon:
 
     system("scp -i path/to/keyfile /etc/unbound/root.hints root@second_dns_server_ip:/etc/unbound/");
     system("scp -i path/to/keyfile /etc/unbound/unbound.conf.d/custom_hosts.conf /etc/unbound/unbound.conf.d/custom.conf root@second_dns_server_ip:/etc/unbound/unbound.conf.d");
-    system("ssh -i path/to/keyfile -t /sbin/systemctl restart unbound");
+    system("ssh -i path/to/keyfile -t /usr/bin/systemctl restart unbound");
 
 This was enough to replicate DNS changes to a secondary (or tertiary) server without needing the full stack again.
