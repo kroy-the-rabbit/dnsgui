@@ -126,6 +126,8 @@ Some extra stuff that didn't quite fit anywhere else.
 
 Currently there is no way to delete a zone, just hostnames via the red "X".  Manually loading up the `unbound.sqlite3` database in the sqlite3 cli and deleting the record is the only way to remove a full zone.
 
+Removing the .sqlite3 database will reset all zones and cause the database to be recreated.
+
 ### Security Considerations
 
 This app is designed to be protected as management. 
