@@ -26,7 +26,7 @@ The one with the most consequence is that by default, DNS-over-TLS to CloudFlare
 
 ### Basic Requirements
 
-This has really only been deployed on Debian Buster with lighttpd (and the instructions that follow assume this).  But it would be trivial to throw Apache, nginx, CentOS, etc in front of this.
+This has really only been deployed on a varity of Debian versions with lighttpd (and the instructions that follow assume this).  But it would be trivial to throw Apache, nginx, CentOS, etc in front of this.  Over the years I've run it on bare metal, Raspberry Pis, and in VMs.
 
 * Unbound
 * PHP, specificially the 7.3.14 that is currently shipping with Buster. But it should work with earlier (to a point) and later versions.
