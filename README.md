@@ -18,7 +18,9 @@ Some of the things it supports:
 * Easily extensible through normal Unbound configuration directives.  
 * Backing up is as simple as saving the .sqlite3 database and custom.conf somewhere.
 
-### Basic Requirements
+The default [custom.conf](data/unbound.conf.d/custom.conf), which is editable in the GUI, makes a number of default assumptions.  
+
+The one with the most consequence is that by default, DNS-over-TLS to CloudFlare will be used. Commenting [all the lines from #38 on](data/unbound.conf.d/custom.conf#L38), will cause `root.hints` to be used.  They can be replaced with the forwarders of your choice.
 
 This has really only been deployed on Debian Buster with lighttpd (and the instructions that follow assume this).  But it would be trivial to throw Apache, nginx, CentOS, etc in front of this.
 
