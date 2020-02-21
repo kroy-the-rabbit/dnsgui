@@ -36,7 +36,7 @@ This guide, and the included [systemd service](daemon/dns_runner.php), assumes t
 
     /var/www/
 
-This location can be changed, but you would need to update the [dns_runner.service](daemon/dns_runner.service) file.
+This location can be changed, but you would need to update the [dns_runner.service](daemon/dns_runner.service#L10) file.
 
 #### lighttpd installation
 
@@ -126,7 +126,7 @@ This app is designed to be protected as management.
 
 An additional layer of security should be applied by implementing SSL and HTTP Basic Auth. Even lighttpd supports a variety of backends like MySQL, LDAP, and PAM.
 
-Finally, this app includes CDN resources for bootstrap and JQuery.  For the hyper-security-conscious, it might be desirable to host those resources locally, which would require a simple edit to [view/index.html](view/index.html).
+Finally, this app includes CDN resources for bootstrap and JQuery.  For the hyper-security-conscious, it might be desirable to host those resources locally, which would require a simple edit to [view/index.html#L13](view/index.html).
 
 ### TODO
 
