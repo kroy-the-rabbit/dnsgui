@@ -118,7 +118,7 @@ Some extra stuff that didn't quite fit anywhere else.
 * `Clone zone` copies the zone that its attached to.  So `host.domain.com` will also resolve to `host.domain2.com` if `domain2.com` is a clone zone for `domain.com`.
 * `Transparent/Static` see the difference in the [Unbound documentation](https://nlnetlabs.nl/documentation/unbound/unbound.conf/)
 
-Currently there is no way to delete a zone, just hostnames.  Manually loading up the `unbound.sqlite3` database in the sqlite3 cli and deleting the record is the only way to remove a full zone.
+Currently there is no way to delete a zone, just hostnames via the red "X".  Manually loading up the `unbound.sqlite3` database in the sqlite3 cli and deleting the record is the only way to remove a full zone.
 
 ### Security Considerations
 
