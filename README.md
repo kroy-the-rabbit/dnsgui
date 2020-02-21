@@ -1,6 +1,6 @@
 # dnsgui
 
-An Unbound GUI for local DNS resolution and forwarding/recursion.
+An Unbound GUI for local DNS resolution and forwarding or recursion.
 
 ![example](https://user-images.githubusercontent.com/20545075/74970589-3ed4be00-53e4-11ea-9893-fb761d6b4c1b.png)
 
