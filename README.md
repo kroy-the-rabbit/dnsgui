@@ -32,11 +32,11 @@ The base requirements can be installed with:
 
     sudo apt install php-cli php-cgi unbound sqlite3 php-sqlite3
 
-This guide, and the included systemd service, assumes that the repository has been cloned to:
+This guide, and the included [systemd service](daemon/dns_runner.php), assumes that the repository has been cloned to:
 
     /var/www/
 
-This location can be changed, but you would need to update the `dns_runner.service` file.
+This location can be changed, but you would need to update the [dns_runner.service](daemon/dns_runner.service) file.
 
 #### lighttpd installation
 
@@ -122,9 +122,11 @@ Currently there is no way to delete a zone, just hostnames via the red "X".  Man
 
 ### Security Considerations
 
-This app is designed to be protected as management. An additional layer of security should be applied by implementing SSL and HTTP Basic Auth. With a more robust web server like nginx, it would be possible to implement two-factor authentication.  
+This app is designed to be protected as management. 
 
-Finally, this app includes CDN resources for bootstrap and JQuery.  For the hyper-security-conscious, it might be desirable to host those resources locally, which would require a simple edit to `view/index.html`.
+An additional layer of security should be applied by implementing SSL and HTTP Basic Auth. Even lighttpd supports a variety of backends like MySQL, LDAP, and PAM.
+
+Finally, this app includes CDN resources for bootstrap and JQuery.  For the hyper-security-conscious, it might be desirable to host those resources locally, which would require a simple edit to [view/index.html](view/index.html).
 
 ### TODO
 
@@ -132,7 +134,7 @@ Proper replication.
 
 In my setup, I just had a scp job with key-based auth to a secondary Unbound instance.  This felt too hacky for release.  
 
-For the curious, this amounted to spinning up a second Debian instance, installing just Unbound, setting up passwordless ssh with keys, and dropping something like this after line #24 of the systemd daemon:
+For the curious, this amounted to spinning up a second Debian instance, installing just Unbound, setting up passwordless ssh with keys, and dropping something like this after line #24 of the [systemd service](daemon/dns_runner.php#L24):
 
     system("scp -i path/to/keyfile /etc/unbound/root.hints root@second_dns_server_ip:/etc/unbound/");
     system("scp -i path/to/keyfile /etc/unbound/unbound.conf.d/custom_hosts.conf /etc/unbound/unbound.conf.d/custom.conf root@second_dns_server_ip:/etc/unbound/unbound.conf.d");
